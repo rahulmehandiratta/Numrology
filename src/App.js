@@ -216,6 +216,7 @@ class App extends React.Component {
     }
 
     return (
+      <>
       <div className="container">
         <span>Choose your Dob: </span>
         <select
@@ -297,6 +298,8 @@ class App extends React.Component {
           </div>
         </div>
       </div>
+      </>
+
     );
   }
 }
