@@ -2,6 +2,14 @@
   text-align: left;
   margin-top: 50px;
 }
+h1 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 32px;
+  color: #333; /* Dark gray color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  letter-spacing: 1px; /* Adds spacing between letters */
+  text-transform: uppercase; /* Converts text to uppercase */
+}
 
 .title {
   font-size: 24px;
@@ -15,6 +23,21 @@
 }
 
 .grid-container {
+  display: flex;
+  padding: auto;
+  gap: 100px;
+  flex-direction: row;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .grid-container {
+    flex-direction: column; /* Change flex direction to column for screens less than 600px wide */
+    gap: 30px; /* Change flex direction to column for screens less than 600px wide */
+  }
+}
+
+.grids {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,4 +60,88 @@
 
 .cell:hover {
   background-color: lightblue;
+}
+
+
+.upi-id {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Media query for print */
+@media print {
+  .container {
+    text-align: left;
+    margin-top: 50px;
+  }
+  h1 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 32px;
+    color: #333; /* Dark gray color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    letter-spacing: 1px; /* Adds spacing between letters */
+    text-transform: uppercase; /* Converts text to uppercase */
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .date-input {
+    margin-bottom: 20px;
+    height: 40px;
+    width: 100px;
+  }
+  
+  .grid-container {
+    display: flex;
+    width: 800px;
+    margin-left: 3px;
+    flex-direction: row;
+    align-items: start;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .grid-container {
+      flex-direction: column; /* Change flex direction to column for screens less than 600px wide */
+      gap: 30px; /* Change flex direction to column for screens less than 600px wide */
+    }
+  }
+  
+  .grids {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .row {
+    background-color: orange;
+    display: flex;
+  }
+  
+  .cell {
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+  }
+  
+  .cell:hover {
+    background-color: lightblue;
+  }
+  
+  
+  .upi-id {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+  .btn {
+    display: none;
+  }
 }

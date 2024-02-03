@@ -168,6 +168,10 @@ class App extends React.Component {
   };
 
   handleSubmit = () => {
+    if (!this.state.day || !this.state.month || !this.state.year) {
+      alert("Please Choose your Dob");
+      return;
+    }
     const dobData = this.displayDob();
     const personalityNumber = dobData.daySum;
     this.setState({
@@ -180,6 +184,31 @@ class App extends React.Component {
       PythagridContent: dobData.PythagridContent,
       vedic: dobData.vedic,
     });
+  };
+
+  handlePrint = () => {
+    if (!this.state.day || !this.state.month || !this.state.year) {
+      alert("Please Choose your Dob");
+      return;
+    }
+    const dobData = this.displayDob();
+    const personalityNumber = dobData.daySum;
+    this.setState(
+      {
+        personalityNumber,
+        daySum: dobData.daySum,
+        monthSum: dobData.monthSum,
+        yearSum: dobData.yearSum,
+        totalSum: dobData.totalSum,
+        gridContent: dobData.gridContent,
+        PythagridContent: dobData.PythagridContent,
+        vedic: dobData.vedic,
+      },
+      () => {
+        // Callback function to ensure state is updated before printing
+        window.print();
+      }
+    );
   };
 
   render() {
@@ -217,89 +246,156 @@ class App extends React.Component {
 
     return (
       <>
-      <div className="container">
-        <span>Choose your Dob: </span>
-        <select
-          className="date-input"
-          onChange={this.handleDayChange}
-          value={this.state.day}
-        >
-          <option value="">Day</option>
-          {days}
-        </select>
-        <select
-          className="date-input"
-          onChange={this.handleMonthChange}
-          value={this.state.month}
-        >
-          <option value="">Month</option>
-          {months}
-        </select>
-        <select
-          className="date-input"
-          onChange={this.handleYearChange}
-          value={this.state.year}
-        >
-          <option value="">Year</option>
-          {years}
-        </select>
-        <div className="default-field">
-          <p>
-            Personality Number : <strong>{this.state.personalityNumber}</strong>
-            <br />
-            Days Sum : <strong>{this.state.daySum}</strong>
-            <br />
-            Month Sum : <strong>{this.state.monthSum}</strong>
-            <br />
-            Year Sum : <strong>{this.state.yearSum}</strong>
-            <br />
-            Total Sum : <strong>{this.state.totalSum}</strong>
-          </p>
-        </div>
-        <button className="btn btn-primary ms-2" onClick={this.handleSubmit}>
-          Submit
-        </button>
-        <div className="d-flex gap-5">
-          <div className="grid-container mt-2">
-            <h1>Lo Shu Grid</h1>
-            {this.state.gridContent.map((row, rowIndex) => (
-              <div key={rowIndex} className="row">
-                {row.map((cellContent, colIndex) => (
-                  <div key={colIndex} className="cell">
-                    {cellContent}
-                  </div>
-                ))}
-              </div>
-            ))}
+        <div className="container">
+          <h1>Rahul's Numerology</h1>
+          <h1>Grid-Calculator</h1>
+          <span className="demo">Choose your Dob: </span>
+          <div className="mobile-selectors">
+            <select
+              className="date-input"
+              onChange={this.handleDayChange}
+              value={this.state.day}
+            >
+              <option value="">Day</option>
+              {days}
+            </select>
+            <select
+              className="date-input ms-1"
+              onChange={this.handleMonthChange}
+              value={this.state.month}
+            >
+              <option value="">Month</option>
+              {months}
+            </select>
+            <select
+              className="date-input ms-1"
+              onChange={this.handleYearChange}
+              value={this.state.year}
+            >
+              <option value="">Year</option>
+              {years}
+            </select>
           </div>
-          <div className="grid-container mt-2">
-            <h1>Vedic Grid</h1>
-            {this.state.vedic.map((row, rowIndex) => (
-              <div key={rowIndex} className="row">
-                {row.map((cellContent, colIndex) => (
-                  <div key={colIndex} className="cell">
-                    {cellContent}
-                  </div>
-                ))}
-              </div>
-            ))}
+          <div className="default-field">
+            <p>
+              Personality Number :{" "}
+              <strong>{this.state.personalityNumber}</strong>
+              <br />
+              Days Sum : <strong>{this.state.daySum}</strong>
+              <br />
+              Month Sum : <strong>{this.state.monthSum}</strong>
+              <br />
+              Year Sum : <strong>{this.state.yearSum}</strong>
+              <br />
+              Total Sum : <strong>{this.state.totalSum}</strong>
+            </p>
           </div>
+          <button className="btn btn-success ms-2" onClick={this.handleSubmit}>
+            Submit
+          </button>
+          <button className="btn btn-primary ms-2" onClick={this.handlePrint}>
+            Print
+          </button>
           <div className="grid-container mt-2">
-            <h1>Pythagorous Grid</h1>
-            {this.state.PythagridContent.map((row, rowIndex) => (
-              <div key={rowIndex} className="row">
-                {row.map((cellContent, colIndex) => (
-                  <div key={colIndex} className="cell">
-                    {cellContent}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      </>
+            <div className="grids">
+              <h5>Lo Shu Grid</h5>
+              {this.state.gridContent.map((row, rowIndex) => (
+                <div key={rowIndex} className="row">
+                  {row.map((cellContent, colIndex) => (
+                    <div key={colIndex} className="cell">
+                      {cellContent}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
 
+            {/* </div> */}
+            {/* <div className="grid-container mt-2"> */}
+            <div className="grids">
+              <h5>Vedic Grid</h5>
+              {this.state.vedic.map((row, rowIndex) => (
+                <div key={rowIndex} className="row">
+                  {row.map((cellContent, colIndex) => (
+                    <div key={colIndex} className="cell">
+                      {cellContent}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            {/* </div> */}
+            {/* <div className="grid-container mt-2"> */}
+            <div className="grids">
+              <h5>Pythagorous Grid</h5>
+              {this.state.PythagridContent.map((row, rowIndex) => (
+                <div key={rowIndex} className="row">
+                  {row.map((cellContent, colIndex) => (
+                    <div key={colIndex} className="cell">
+                      {cellContent}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* </div> */}
+          <button
+            type="button"
+            className="btn btn-primary mt-4"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Show Some Support
+          </button>
+
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                  Show Some Support
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <p className="upi-id">
+                    UPI ID:{" "}
+                    <a href="upi://pay?pa=rahulmehandiratta815@oksbi">
+                      rahulmehandiratta815@oksbi
+                    </a>
+                  </p>{" "}
+                  <img  src="/scanner.jpeg" alt="Support Image"
+                  style={{ maxWidth: "200px", maxHeight: "200px" }} />
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 }
