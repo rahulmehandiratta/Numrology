@@ -46,6 +46,16 @@ class App extends React.Component {
     this.setState({ year: value });
   };
 
+  calculateSingleDigitSum = (number) => {
+    let digitSum = number;
+  
+    while (digitSum >= 10) {
+      digitSum = this.calculateDigitSum(digitSum);
+    }
+  
+    return digitSum;
+  };
+
   calculateDigitSum = (number) => {
     return number
       .toString()
@@ -57,9 +67,9 @@ class App extends React.Component {
   displayDob = () => {
     const { day, month, year } = this.state;
 
-    const daySum = this.calculateDigitSum(parseInt(day));
-    const monthSum = this.calculateDigitSum(parseInt(month));
-    const yearSum = this.calculateDigitSum(parseInt(year));
+    const daySum = this.calculateSingleDigitSum(parseInt(day));
+    const monthSum = this.calculateSingleDigitSum(parseInt(month));
+    const yearSum = this.calculateSingleDigitSum(parseInt(year));
     let totalSum = daySum + monthSum + yearSum;
 
     let totalSumforgrid = totalSum; // Initialize totalSumforgrid with totalSum
@@ -247,8 +257,8 @@ class App extends React.Component {
     return (
       <>
         <div className="container">
-          <h1>Rahul's Numerology</h1>
-          <h1>Grid-Calculator</h1>
+          <h1 className="navbar-heading">Rahul's Numerology Grid-Calculator</h1>
+          <hr />
           <span className="demo">Choose your Dob: </span>
           <div className="mobile-selectors">
             <select
@@ -276,6 +286,12 @@ class App extends React.Component {
               {years}
             </select>
           </div>
+          <button className="btn btn-success" onClick={this.handleSubmit}>
+            Submit
+          </button>
+          <button className="btn btn-primary ms-2" onClick={this.handlePrint}>
+            Print
+          </button>
           <div className="default-field">
             <p>
               Personality Number :{" "}
@@ -290,12 +306,7 @@ class App extends React.Component {
               Total Sum : <strong>{this.state.totalSum}</strong>
             </p>
           </div>
-          <button className="btn btn-success ms-2" onClick={this.handleSubmit}>
-            Submit
-          </button>
-          <button className="btn btn-primary ms-2" onClick={this.handlePrint}>
-            Print
-          </button>
+          
           <div className="grid-container mt-2">
             <div className="grids">
               <h5>Lo Shu Grid</h5>
@@ -344,11 +355,11 @@ class App extends React.Component {
           {/* </div> */}
           <button
             type="button"
-            className="btn btn-primary mt-4"
+            className="btn btn-primary mt-4 mb-4"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
-            Show Some Support
+            Click To Show Some Support
           </button>
 
           <div
@@ -384,7 +395,7 @@ class App extends React.Component {
                 <div class="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-secondary"
+                    className="btn btn-secondary mt-4 mb-4"
                     
                     data-bs-dismiss="modal"
                   >
